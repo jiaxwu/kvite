@@ -1,5 +1,5 @@
 # kvite
-一个基于uni-app plus.sqlite 的kv数据库
+一个基于uni-app plus.sqlite 的kv数据库，支持增删查改，多数据库，多表等高级操作
 
 
 
