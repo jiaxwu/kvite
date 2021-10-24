@@ -1,9 +1,9 @@
 /**
- * 打开数据库
+ * 打开数据库，打开后可以对数据库进行操作
  * @param {String} dbName 数据库名
  * @throws {Error}
  */
-export const openDb = async (dbName) => {
+ export const openDb = async (dbName) => {
     await new Promise((resolve, _) => {
         plus.sqlite.openDatabase({
             name: dbName,
@@ -19,7 +19,7 @@ export const openDb = async (dbName) => {
 }
 
 /**
- * 关闭数据库，关闭后会释放资源，但是对数据库的操作将失败
+ * 关闭数据库，关闭后会释放资源，对数据库的操作将失败
  * @param {String} dbName 数据库名
  * @throws {Error}
  */
@@ -216,7 +216,7 @@ export class Kvite {
     }
 
     /**
-     * 获取数量
+     * 获取表的记录数
      * @returns {Number} 数量
      * @throws {Error}
      */
@@ -237,7 +237,7 @@ export class Kvite {
     }
 
     /**
-     * 获取全部key的Array
+     * 获取全部key，返回Array集合
      * @returns {Array<String>} keys
      * @throws {Error}
      */
@@ -262,7 +262,7 @@ export class Kvite {
     }
 
     /**
-     * 获取全部key的Set
+     * 获取全部key，返回Set集合
      * @returns {Set<String>} keySet
      * @throws {Error}
      */
@@ -287,7 +287,7 @@ export class Kvite {
     }
 
     /**
-     * 获取全部value的Array
+     * 获取全部value，返回Array集合
      * @returns {Array<Object>} values
      * @throws {Error}
      */
@@ -312,7 +312,7 @@ export class Kvite {
     }
 
     /**
-     * 返回全部key-value的map对象
+     * 获取全部key-value，返回Map集合
      * @returns {Map<String, Object>} map
      * @throws {Error}
      */
