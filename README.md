@@ -72,15 +72,15 @@ API都在Kvite类上，一个Kvite代表一个数据库的一个表
 
 其他API，同样在Kvite上，用于实现上面的API，有风险，若使用请谨慎
 
-| api                            | 参数1类型 | 参数2类型 | 返回值类型      | 说明                                               |
-| ------------------------------ | --------- | --------- | --------------- | -------------------------------------------------- |
-| constructor(dbName, tableName) | String    | String    | Kvite           | 构造器，构造一个Kvite，需要自行初始化              |
-| async init()                   |           |           |                 | 初始化（通过new Kvite()创建实例时需要调用）        |
-| async openDb()                 |           |           |                 | 打开数据库，打开后可以对数据库进行操作             |
-| async closeDb()                |           |           |                 | 关闭数据库，关闭后会释放资源，对数据库的操作将失败 |
-| isOpenDb()                     |           |           | Boolean         | 数据库是否打开                                     |
-| async createTable()            |           |           |                 | 创建表                                             |
-| async removeTable()            |           |           |                 | 删除表                                             |
-| checkDb()                      |           |           |                 | 检查数据库是否正常                                 |
-| async executeSQL(sql)          | String    |           |                 | 执行SQL的封装                                      |
-| async selectSQL(sql)           | String    |           | {Array<Object>} | 查询SQL的封装                                      |
+| api                            | 参数1类型 | 参数2类型 | 返回值类型    | 说明                                               |
+| ------------------------------ | --------- | --------- | ------------- | -------------------------------------------------- |
+| constructor(dbName, tableName) | String    | String    | Kvite         | 构造器，构造一个Kvite，需要自行初始化              |
+| async init()                   |           |           |               | 初始化（通过new Kvite()创建实例时需要调用）        |
+| async openDb()                 |           |           |               | 打开数据库，打开后可以对数据库进行操作             |
+| async closeDb()                |           |           |               | 关闭数据库，关闭后会释放资源，对数据库的操作将失败 |
+| isOpenDb()                     |           |           | Boolean       | 数据库是否打开                                     |
+| async createTable()            |           |           |               | 创建表                                             |
+| async removeTable()            |           |           |               | 删除表                                             |
+| checkDb()                      |           |           |               | 检查数据库是否正常                                 |
+| async executeSQL(sql)          | String    |           |               | 执行SQL的封装                                      |
+| async selectSQL(sql)           | String    |           | Array<Object> | 查询SQL的封装                                      |
