@@ -68,7 +68,7 @@ API都在Kvite类上，一个Kvite代表一个数据库的一个表
 | setValueSerializer(serializer)                    | Object => Object |           |                     | 设置value序列化器                |
 | setValueDeserializer(deserializer)                | Object => Object |           |                     | 设置value反序列化器              |
 | getDbName()                                       |                  |           | String              | 获取数据库名                     |
-| getTableName()                                    |                  |           | String              | 表名                             |
+| getTableName()                                    |                  |           | String              | 获取表名                         |
 
 其他API，同样在Kvite上，用于实现上面的API，有风险，若使用请谨慎
 
