@@ -1,4 +1,4 @@
-kvite
+# kvite
 
 一个基于uni-app plus.sqlite 的kv数据库，支持增删查改，多数据库，多表，自定义序列化器，反序列化器等
 
