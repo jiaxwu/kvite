@@ -1,7 +1,7 @@
 /**
  * Kvite
  */
- export default class Kvite {
+export default class Kvite {
   /**
    * 数据库名
    */
@@ -38,17 +38,17 @@
    * @throws {Error}
    */
   async put(key, value) {
-    await new Promise((resolve, _) => {
+    return new Promise((resolve, reject) => {
       plus.sqlite.executeSql({
         name: this.dbName,
         sql: `INSERT OR REPLACE INTO ${
           this.tableName
         } (key, value) VALUES('${key}', '${JSON.stringify(value)}')`,
-        success(_) {
+        success(res) {
           resolve();
         },
         fail(e) {
-          throw new Error(e);
+          reject(e);
         },
       });
     });
@@ -61,7 +61,7 @@
    * @throws {Error}
    */
   async get(key) {
-    const res = await new Promise((resolve, _) => {
+    const res = await new Promise((resolve, reject) => {
       plus.sqlite.selectSql({
         name: this.dbName,
         sql: `SELECT key, value FROM ${this.tableName} WHERE key = '${key}'`,
@@ -69,7 +69,7 @@
           resolve(res);
         },
         fail(e) {
-          throw new Error(e);
+          reject(e);
         },
       });
     });
@@ -82,15 +82,15 @@
    * @throws {Error}
    */
   async remove(key) {
-    await new Promise((resolve, _) => {
+    return new Promise((resolve, reject) => {
       plus.sqlite.executeSql({
         name: this.dbName,
         sql: `DELETE FROM ${this.tableName} WHERE key = '${key}'`,
-        success(_) {
+        success(res) {
           resolve();
         },
         fail(e) {
-          throw new Error(e);
+          reject(e);
         },
       });
     });
@@ -103,7 +103,7 @@
    * @throws {Error}
    */
   async containsKey(key) {
-    const res = await new Promise((resolve, _) => {
+    const res = await new Promise((resolve, reject) => {
       plus.sqlite.selectSql({
         name: this.dbName,
         sql: `SELECT key FROM ${this.tableName} WHERE key = '${key}'`,
@@ -111,7 +111,7 @@
           resolve(res);
         },
         fail(e) {
-          throw new Error(e);
+          reject(e);
         },
       });
     });
@@ -123,15 +123,15 @@
    * @throws {Error}
    */
   async clear() {
-    await new Promise((resolve, _) => {
+    return new Promise((resolve, reject) => {
       plus.sqlite.executeSql({
         name: this.dbName,
         sql: `DELETE FROM ${this.tableName}`,
-        success(_) {
+        success(res) {
           resolve();
         },
         fail(e) {
-          throw new Error(e);
+          reject(e);
         },
       });
     });
@@ -143,7 +143,7 @@
    * @throws {Error}
    */
   async size() {
-    const res = await new Promise((resolve, _) => {
+    const res = await new Promise((resolve, reject) => {
       plus.sqlite.selectSql({
         name: this.dbName,
         sql: `SELECT COUNT(*) AS size FROM ${this.tableName}`,
@@ -151,7 +151,7 @@
           resolve(res);
         },
         fail(e) {
-          throw new Error(e);
+          reject(e);
         },
       });
     });
@@ -164,7 +164,7 @@
    * @throws {Error}
    */
   async keys() {
-    const res = await new Promise((resolve, _) => {
+    const res = await new Promise((resolve, reject) => {
       plus.sqlite.selectSql({
         name: this.dbName,
         sql: `SELECT key FROM ${this.tableName}`,
@@ -172,7 +172,7 @@
           resolve(res);
         },
         fail(e) {
-          throw new Error(e);
+          reject(e);
         },
       });
     });
@@ -189,7 +189,7 @@
    * @throws {Error}
    */
   async keySet() {
-    const res = await new Promise((resolve, _) => {
+    const res = await new Promise((resolve, reject) => {
       plus.sqlite.selectSql({
         name: this.dbName,
         sql: `SELECT key FROM ${this.tableName}`,
@@ -197,7 +197,7 @@
           resolve(res);
         },
         fail(e) {
-          throw new Error(e);
+          reject(e);
         },
       });
     });
@@ -214,7 +214,7 @@
    * @throws {Error}
    */
   async values() {
-    const res = await new Promise((resolve, _) => {
+    const res = await new Promise((resolve, reject) => {
       plus.sqlite.selectSql({
         name: this.dbName,
         sql: `SELECT value FROM ${this.tableName}`,
@@ -222,7 +222,7 @@
           resolve(res);
         },
         fail(e) {
-          throw new Error(e);
+          reject(e);
         },
       });
     });
@@ -239,7 +239,7 @@
    * @throws {Error}
    */
   async map() {
-    const res = await new Promise((resolve, _) => {
+    const res = await new Promise((resolve, reject) => {
       plus.sqlite.selectSql({
         name: this.dbName,
         sql: `SELECT key, value FROM ${this.tableName}`,
@@ -247,7 +247,7 @@
           resolve(res);
         },
         fail(e) {
-          throw new Error(e);
+          reject(e);
         },
       });
     });
@@ -264,7 +264,7 @@
    * @throws {Error}
    */
   async isEmpty() {
-    const res = await new Promise((resolve, _) => {
+    const res = await new Promise((resolve, reject) => {
       plus.sqlite.selectSql({
         name: this.dbName,
         sql: `SELECT key FROM ${this.tableName} LIMIT 1`,
@@ -272,7 +272,7 @@
           resolve(res);
         },
         fail(e) {
-          throw new Error(e);
+          reject(e);
         },
       });
     });
@@ -285,15 +285,15 @@
    * @throws {Error}
    */
   static async openDb(dbName) {
-    await new Promise((resolve, _) => {
+    return new Promise((resolve, reject) => {
       plus.sqlite.openDatabase({
         name: dbName,
         path: `_doc/${dbName}.db`,
-        success(_) {
+        success(res) {
           resolve();
         },
         fail(e) {
-          throw new Error(e);
+          reject(e);
         },
       });
     });
@@ -305,14 +305,14 @@
    * @throws {Error}
    */
   static async closeDb(dbName) {
-    await new Promise((resolve, _) => {
+    return new Promise((resolve, reject) => {
       plus.sqlite.closeDatabase({
         name: dbName,
-        success(_) {
+        success(res) {
           resolve();
         },
         fail(e) {
-          throw new Error(e);
+          reject(e);
         },
       });
     });
@@ -343,15 +343,15 @@
     }
 
     // 创建表
-    return new Promise((resolve, _) => {
+    return new Promise((resolve, reject) => {
       plus.sqlite.executeSql({
         name: dbName,
         sql: `CREATE TABLE IF NOT EXISTS ${tableName} ("key" TEXT PRIMARY KEY NOT NULL, "value" TEXT NOT NULL)`,
-        success(_) {
+        success(res) {
           resolve();
         },
         fail(e) {
-          throw new Error(e);
+          reject(e);
         },
       });
     });
