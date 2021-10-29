@@ -110,9 +110,9 @@ export default class Kvite {
     return this.executeSQL(
       `INSERT OR REPLACE INTO ${
         this.tableName
-      } (key, value) VALUES (${this.keySerializer(
+      } (key, value) VALUES ('${this.keySerializer(
         key
-      )}, '${this.valueSerializer(value)}')`
+      )}', '${this.valueSerializer(value)}')`
     );
   }
 
@@ -126,7 +126,7 @@ export default class Kvite {
     const res = await this.selectSQL(
       `SELECT key, value FROM ${
         this.tableName
-      } WHERE key = ${this.keySerializer(key)}`
+      } WHERE key = '${this.keySerializer(key)}'`
     );
     return res.length > 0 ? this.valueDeserializer(res[0].value) : null;
   }
@@ -138,7 +138,7 @@ export default class Kvite {
    */
   async remove(key) {
     return this.executeSQL(
-      `DELETE FROM ${this.tableName} WHERE key = ${this.keySerializer(key)}`
+      `DELETE FROM ${this.tableName} WHERE key = '${this.keySerializer(key)}'`
     );
   }
 
@@ -150,7 +150,7 @@ export default class Kvite {
    */
   async containsKey(key) {
     const res = await this.selectSQL(
-      `SELECT key FROM ${this.tableName} WHERE key = ${this.keySerializer(key)}`
+      `SELECT key FROM ${this.tableName} WHERE key = '${this.keySerializer(key)}'`
     );
     return res.length > 0;
   }
